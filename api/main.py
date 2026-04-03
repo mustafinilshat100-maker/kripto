@@ -16,6 +16,7 @@ from redis.exceptions import RedisError
 
 from config import (
     REDIS_URL,
+    POSTGRES_URL,
     QUOTE_MINTS,
     STREAM_SWAP,
     STREAM_ADD_LIQUIDITY,
@@ -24,6 +25,7 @@ from config import (
     HELIUS_WEBHOOK_SECRET,
     STREAM_PARTITIONS,
 )
+import os
 
 logging.basicConfig(
     level=logging.INFO,

@@ -58,7 +58,7 @@ SMALL_POOL_THRESHOLD_USD: Final[float] = float(os.getenv("SMALL_POOL_THRESHOLD_U
 # =============================================================================
 REDIS_HOST: Final[str] = os.getenv("REDIS_HOST", "localhost")
 REDIS_PORT: Final[int] = int(os.getenv("REDIS_PORT", "6379"))
-REDIS_URL: Final[str] = f"redis://{REDIS_HOST}:{REDIS_PORT}"
+REDIS_URL: Final[str] = os.getenv("REDIS_URL") or os.getenv("REDIS_CONNECTION_STRING") or f"redis://{REDIS_HOST}:{REDIS_PORT}"
 
 # =============================================================================
 # POSTGRES
@@ -68,7 +68,8 @@ POSTGRES_PORT: Final[int] = int(os.getenv("POSTGRES_PORT", "5432"))
 POSTGRES_DB: Final[str] = os.getenv("POSTGRES_DB", "signals")
 POSTGRES_USER: Final[str] = os.getenv("POSTGRES_USER", "signals")
 POSTGRES_PASSWORD: Final[str] = os.getenv("POSTGRES_PASSWORD", "signals_pass")
-POSTGRES_URL: Final[str] = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+# Support Railway's DATABASE_URL format
+POSTGRES_URL: Final[str] = os.getenv("DATABASE_URL") or os.getenv("POSTGRES_URL") or f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
 
 # =============================================================================
 # TELEGRAM
